@@ -6,4 +6,7 @@ package Tweeter;
  * Assignment: LyricScraper
  */
 public class Tweet {
+    public static void main(String[] args) {
+
+    }
 }
