@@ -1,4 +1,3 @@
-
 who's that talking in the library
 who's that talking in my library
 is that you
@@ -47,3 +46,4 @@ so will we
 turn to dust
 so will we
 dust dust
+~END~
