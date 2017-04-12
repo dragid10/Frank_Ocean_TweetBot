@@ -191,3 +191,5 @@ tmp/
 .worksheet
 !/src/Scraper/
 !/src/Tweeter/
+/DBUserName_Password.txt
+/twitter4j.properties
