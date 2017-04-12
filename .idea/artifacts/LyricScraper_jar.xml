@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LyricScraper:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LyricScraper_jar</output-path>
+    <root id="archive" name="LyricScraper.jar">
+      <element id="module-output" name="LyricScraper" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/sqljdbc42.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/twitter4j-core-4.0.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

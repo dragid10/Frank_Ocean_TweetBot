@@ -213,3 +213,4 @@ tmp/
 !/lib/hamcrest-core-1.3.jar
 !/lib/sqljdbc42.jar
 !/lib/
+!/src/META-INF/MANIFEST.MF
