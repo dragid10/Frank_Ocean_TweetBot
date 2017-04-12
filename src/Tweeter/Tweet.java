@@ -4,6 +4,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 import java.io.*;
 import java.sql.*;
@@ -29,21 +30,25 @@ public class Tweet {
                 String lyricToTweet = getLyricsFromDB();
 
                 //        Post Tweet to Twitter
-                postTweet(lyricToTweet);
+                try {
+                    postTweet(lyricToTweet);
+                } catch (IOException e) {
+                    wasSuccessful(false);
+                    System.out.println("Tweet Not Successfully posted!");
+                    e.printStackTrace();
+                }
             }
         };
 
 // schedule the task to run starting now and then every hour...
-        timer.schedule(hourlyTask, 0l, ((1000 * 60 * 60) * 2));
+        timer.schedule(hourlyTask, 0L, ((1000 * 60 * 60) * 2));
 
 
     }
 
-    private static void postTweet(String lyric) {
-//        connectToTwitter();
-
-        // The factory instance is re-useable and thread safe.
-        Twitter twitter = TwitterFactory.getSingleton();
+    private static void postTweet(String lyric) throws IOException {
+        BufferedReader twitterProp = new BufferedReader(new FileReader(new File("twitter4j.properties")));
+        Twitter twitter = connectToTwitter(twitterProp).getInstance();
         Status status = null;
         try {
             status = twitter.updateStatus(lyric);
@@ -53,6 +58,24 @@ public class Tweet {
             System.out.println("Tweet Not Successfully Posted!");
             e.printStackTrace();
         }
+    }
+
+    private static TwitterFactory connectToTwitter(BufferedReader bf) throws IOException {
+        String debug = bf.readLine();
+        String consumerKey = bf.readLine();
+        String consumerSecret = bf.readLine();
+        String accessToken = bf.readLine();
+        String accessTokenSecret = bf.readLine();
+
+        // The factory instance is re-useable and thread safe.
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(consumerKey)
+                .setOAuthConsumerSecret(consumerSecret)
+                .setOAuthAccessToken(accessToken)
+                .setOAuthAccessTokenSecret(accessTokenSecret);
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        return tf;
     }
 
     private static String getLyricsFromDB() {
