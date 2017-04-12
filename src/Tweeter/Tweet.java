@@ -15,7 +15,7 @@ import java.util.TimerTask;
 /**
  * Name: Alex Oladele
  * Date: 3/19/17
- * Assignment: LyricScraper
+ * Project: TwitterBot
  */
 public class Tweet {
     public static void main(String[] args) {
@@ -47,8 +47,12 @@ public class Tweet {
     }
 
     private static void postTweet(String lyric) throws IOException {
+//        Reads in Prop File to connect programmatically
         BufferedReader twitterProp = new BufferedReader(new FileReader(new File("twitter4j.properties")));
         Twitter twitter = connectToTwitter(twitterProp).getInstance();
+
+//        Uncomment to use twitter4J.prop file and comment above line
+//        Twitter twitter = new TwitterFactory().getInstance();
         Status status = null;
         try {
             status = twitter.updateStatus(lyric);
@@ -61,11 +65,12 @@ public class Tweet {
     }
 
     private static TwitterFactory connectToTwitter(BufferedReader bf) throws IOException {
-        String debug = bf.readLine();
-        String consumerKey = bf.readLine();
-        String consumerSecret = bf.readLine();
-        String accessToken = bf.readLine();
-        String accessTokenSecret = bf.readLine();
+//        Connects to Twitter Programmatically
+        String debug = bf.readLine().trim(); // Unused
+        String consumerKey = bf.readLine().trim();
+        String consumerSecret = bf.readLine().trim();
+        String accessToken = bf.readLine().trim();
+        String accessTokenSecret = bf.readLine().trim();
 
         // The factory instance is re-useable and thread safe.
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -99,8 +104,7 @@ public class Tweet {
 
     private static Connection connectToDB(Connection connection) throws ClassNotFoundException, FileNotFoundException {
         // TODO Change File to path that contains username and password to DB and remove "-sample' from twitter4j prop
-//        File userNamePassword = new File("DBUserName_Password.txt");
-        File userNamePassword = new File("DBUserName_Password-sample.txt");
+        File userNamePassword = new File("DBUserName_Password.txt");
         Scanner in = new Scanner(userNamePassword);
         String userName = null, password = null;
 
@@ -296,57 +300,4 @@ public class Tweet {
             return false;
         }
     }
-
-    //region MergeLyrics (Unused)
-    /*static void mergeLyrics() {
-        // Dir you're reading from
-        File dir, file = null;
-        BufferedWriter bWriter = null;
-        BufferedReader bReader = null;
-        String line = null;
-
-//        Reading from the lyrics folder
-        dir = new File("lyrics");
-
-//        Get sub directories
-        File[] subDirs = dir.listFiles();
-
-
-        try {
-//            Creates file that all lyrics will be written to
-            file = new File("compiled_lyrics.txt");
-
-//            Assigns bufferedWriter to write to above file
-            bWriter = new BufferedWriter(new FileWriter(file));
-
-//            Reads each file in the Lyrics Directory
-            for (File subDir : subDirs) {
-                File[] newFile = subDir.listFiles();
-                for (File f : newFile) {
-                    System.out.println(f);
-//                Assigns File to Buffered Reader to read in
-                    bReader = new BufferedReader(new FileReader(f));
-
-//                Reads in Lines from files
-                    while ((line = bReader.readLine()) != null) {
-                        line = line.trim();
-//                    Makes sure that the line isn't already empty
-                        if (!Objects.equals(line, "")) {
-
-//                        Appends to file with lyric line
-                            bWriter.append(line).append("\r\n");
-                        } else if (line.equals("~END~")) {
-                            bWriter.append("\r\n").append("\r\n");
-                        } else {
-                            bWriter.append("\r\n");
-                        }
-                    }
-                }
-            }
-            bWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-    //endregion
 }
