@@ -75,7 +75,7 @@ public class Tweet {
     }
 
     private static Connection connectToDB(Connection connection) throws ClassNotFoundException, FileNotFoundException {
-        // TODO Change File to path that contains username and password to DB
+        // TODO Change File to path that contains username and password to DB and remove "-sample' from twitter4j prop
 //        File userNamePassword = new File("DBUserName_Password.txt");
         File userNamePassword = new File("DBUserName_Password-sample.txt");
         Scanner in = new Scanner(userNamePassword);
