@@ -3,7 +3,8 @@
 This is a bot that tweets Random Frank Ocean lyrics on a two-hour time interval.  
 The lyrics are updated as new songs come out.
 
-Follow it on [Twitter](https://twitter.com/FrankOceanBot)  
+Follow it on [Twitter](https://twitter.com/FrankOceanBot)
+Project re-created in [Kotlin](https://github.com/dragid10/FrankOceanBot_Kotlin)
 ___
 
 #### Twitter Connection #### 
