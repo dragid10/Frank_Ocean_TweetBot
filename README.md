@@ -1,4 +1,5 @@
 # Frank Ocean Twitter Bot #
+*(Note: Probably won't be updating this repo much as I'd rather keep up the Kotlin version)*
 
 This is a bot that tweets Random Frank Ocean lyrics on a two-hour time interval.  
 The lyrics are updated as new songs come out.
